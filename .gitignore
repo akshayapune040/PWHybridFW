@@ -12,7 +12,7 @@ playwright-report/
 # Test Results
 TestResults/
 test-results/
-*.log
+*.log  
 
 # Screenshots
 screenshots/

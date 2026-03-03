@@ -1,0 +1,135 @@
+{
+  "validUsers": [
+    {
+      "email": "user@example.com",
+      "password": "Test@123",
+      "role": "customer",
+      "expectedResult": "success",
+      "description": "Standard customer account"
+    },
+    {
+      "email": "admin@example.com",
+      "password": "Admin@123",
+      "role": "admin",
+      "expectedResult": "success",
+      "description": "Administrator account"
+    },
+    {
+      "email": "testuser@test.com",
+      "password": "Password123!",
+      "role": "customer",
+      "expectedResult": "success",
+      "description": "Test customer account"
+    }
+  ],
+  "invalidCredentials": [
+    {
+      "email": "wrong@example.com",
+      "password": "Test@123",
+      "expectedResult": "error",
+      "errorMessage": "Invalid credentials",
+      "description": "Valid password with wrong email"
+    },
+    {
+      "email": "user@example.com",
+      "password": "wrongpass",
+      "expectedResult": "error",
+      "errorMessage": "Invalid password",
+      "description": "Valid email with wrong password"
+    },
+    {
+      "email": "nonexistent@test.com",
+      "password": "SomePass123",
+      "expectedResult": "error",
+      "errorMessage": "User not found",
+      "description": "Non-existent user"
+    }
+  ],
+  "edgeCases": {
+    "empty": {
+      "email": "",
+      "password": "",
+      "expectedResult": "error",
+      "errorMessage": "Email is required",
+      "description": "Both fields empty"
+    },
+    "emptyEmail": {
+      "email": "",
+      "password": "Test@123",
+      "expectedResult": "error",
+      "errorMessage": "Email is required",
+      "description": "Empty email field"
+    },
+    "emptyPassword": {
+      "email": "user@example.com",
+      "password": "",
+      "expectedResult": "error",
+      "errorMessage": "Password is required",
+      "description": "Empty password field"
+    },
+    "sqlInjection": {
+      "email": "' OR '1'='1",
+      "password": "anything",
+      "expectedResult": "error",
+      "errorMessage": "Invalid credentials",
+      "description": "SQL injection attempt in email"
+    },
+    "sqlInjectionPassword": {
+      "email": "user@example.com",
+      "password": "' OR '1'='1",
+      "expectedResult": "error",
+      "errorMessage": "Invalid credentials",
+      "description": "SQL injection attempt in password"
+    },
+    "specialCharsEmail": {
+      "email": "user@<script>alert(1)</script>",
+      "password": "pass",
+      "expectedResult": "error",
+      "errorMessage": "Invalid email format",
+      "description": "XSS attempt in email"
+    },
+    "specialCharsPassword": {
+      "email": "user@example.com",
+      "password": "pass&<>\"'",
+      "expectedResult": "error",
+      "errorMessage": "Invalid credentials",
+      "description": "Special characters in password"
+    },
+    "caseSensitivity": {
+      "email": "USER@EXAMPLE.COM",
+      "password": "TEST@123",
+      "expectedResult": "error",
+      "errorMessage": "Invalid credentials",
+      "description": "Email and password in uppercase"
+    },
+    "trailingSpaces": {
+      "email": "  user@example.com  ",
+      "password": "Test@123",
+      "expectedResult": "success",
+      "description": "Email with trailing spaces"
+    },
+    "veryLongEmail": {
+      "email": "verylongemailexceedingnormalcharacterscount@verylongdomainnameexceedingnormal.com",
+      "password": "Test@123",
+      "expectedResult": "error",
+      "errorMessage": "Invalid email format",
+      "description": "Extremely long email address"
+    },
+    "noAtSymbol": {
+      "email": "userexample.com",
+      "password": "Test@123",
+      "expectedResult": "error",
+      "errorMessage": "Invalid email format",
+      "description": "Email without @ symbol"
+    }
+  },
+  "rememberMe": {
+    "enabled": true,
+    "description": "Remember me checkbox selected"
+  },
+  "urls": {
+    "loginPage": "/login",
+    "forgotPasswordPage": "/forgot-password",
+    "dashboardPage": "/dashboard"
+  }
+}

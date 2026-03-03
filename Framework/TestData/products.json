@@ -1,0 +1,141 @@
+{
+  "searchTerms": {
+    "valid": [
+      "laptop",
+      "phone",
+      "headphones",
+      "camera",
+      "watch"
+    ],
+    "noResults": [
+      "xyz123nonexistent",
+      "abcdefghijk",
+      "randomword12345"
+    ],
+    "specialChars": [
+      "@#$%",
+      "<script>alert(1)</script>",
+      "!@#$%^&*()"
+    ],
+    "empty": "",
+    "singleChar": "a",
+    "veryLong": "this is a very long search term that exceeds normal character count for testing input validation"
+  },
+  "categories": [
+    "electronics",
+    "clothing",
+    "home",
+    "books",
+    "sports",
+    "toys"
+  ],
+  "sortOptions": {
+    "priceLowHigh": "price_asc",
+    "priceHighLow": "price_desc",
+    "nameAZ": "name_asc",
+    "nameZA": "name_desc",
+    "newest": "date_desc",
+    "popularity": "popularity_desc"
+  },
+  "priceRanges": [
+    { "min": 0, "max": 50, "label": "Under $50" },
+    { "min": 50, "max": 100, "label": "$50 - $100" },
+    { "min": 100, "max": 500, "label": "$100 - $500" },
+    { "min": 500, "max": 1000, "label": "$500 - $1000" },
+    { "min": 1000, "max": null, "label": "Over $1000" }
+  ],
+  "products": [
+    {
+      "id": "prod001",
+      "name": "Test Laptop",
+      "description": "High-performance laptop for testing",
+      "price": 999.99,
+      "originalPrice": 1299.99,
+      "category": "electronics",
+      "inStock": true,
+      "stockCount": 50,
+      "rating": 4.5,
+      "brand": "TechBrand",
+      "imageUrl": "/images/laptop.jpg"
+    },
+    {
+      "id": "prod002",
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse",
+      "price": 29.99,
+      "originalPrice": 39.99,
+      "category": "electronics",
+      "inStock": true,
+      "stockCount": 200,
+      "rating": 4.2,
+      "brand": "MouseMaster",
+      "imageUrl": "/images/mouse.jpg"
+    },
+    {
+      "id": "prod003",
+      "name": "Cotton T-Shirt",
+      "description": "Comfortable cotton t-shirt",
+      "price": 19.99,
+      "originalPrice": null,
+      "category": "clothing",
+      "inStock": true,
+      "stockCount": 500,
+      "rating": 4.0,
+      "brand": "FashionCo",
+      "imageUrl": "/images/tshirt.jpg"
+    },
+    {
+      "id": "prod004",
+      "name": "Out of Stock Item",
+      "description": "Product currently out of stock",
+      "price": 49.99,
+      "originalPrice": 59.99,
+      "category": "electronics",
+      "inStock": false,
+      "stockCount": 0,
+      "rating": 3.8,
+      "brand": "TechBrand",
+      "imageUrl": "/images/outofstock.jpg"
+    },
+    {
+      "id": "prod005",
+      "name": "Limited Stock Product",
+      "description": "Product with limited availability",
+      "price": 149.99,
+      "originalPrice": null,
+      "category": "electronics",
+      "inStock": true,
+      "stockCount": 3,
+      "rating": 4.7,
+      "brand": "RareGoods",
+      "imageUrl": "/images/limited.jpg"
+    },
+    {
+      "id": "prod006",
+      "name": "Sale Item",
+      "description": "Product on sale",
+      "price": 79.99,
+      "originalPrice": 159.99,
+      "category": "home",
+      "inStock": true,
+      "stockCount": 100,
+      "rating": 4.3,
+      "brand": "HomeStyle",
+      "imageUrl": "/images/sale.jpg"
+    }
+  ],
+  "filters": {
+    "brands": ["TechBrand", "MouseMaster", "FashionCo", "RareGoods", "HomeStyle"],
+    "ratings": [1, 2, 3, 4, 5],
+    "availability": ["inStock", "outOfStock", "all"]
+  },
+  "pagination": {
+    "itemsPerPage": 12,
+    "maxVisiblePages": 5
+  },
+  "urls": {
+    "productListPage": "/products",
+    "productDetailPage": "/product",
+    "searchResultsPage": "/search"
+  }
+}

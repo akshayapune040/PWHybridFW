@@ -1,0 +1,266 @@
+{
+  "validCheckout": [
+    {
+      "id": "checkout001",
+      "user": "user@example.com",
+      "shipping": {
+        "name": "John Doe",
+        "address": "123 Main Street",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10001",
+        "country": "USA",
+        "phone": "555-123-4567"
+      },
+      "billing": {
+        "sameAsShipping": true
+      },
+      "payment": {
+        "method": "creditCard",
+        "cardNumber": "4111111111111111",
+        "expiry": "12/25",
+        "cvv": "123",
+        "cardName": "John Doe"
+      },
+      "promoCode": "",
+      "expectedResult": "success",
+      "description": "Standard checkout with credit card"
+    },
+    {
+      "id": "checkout002",
+      "user": "user@example.com",
+      "shipping": {
+        "name": "Jane Smith",
+        "address": "456 Oak Avenue",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zip": "90001",
+        "country": "USA",
+        "phone": "555-987-6543"
+      },
+      "billing": {
+        "sameAsShipping": false,
+        "address": "789 Pine Road",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94102"
+      },
+      "payment": {
+        "method": "paypal",
+        "email": "jane@example.com"
+      },
+      "promoCode": "SAVE10",
+      "expectedResult": "success",
+      "description": "Checkout with PayPal and promo code"
+    }
+  ],
+  "guestCheckout": {
+    "email": "guest@example.com",
+    "shipping": {
+      "name": "Guest User",
+      "address": "456 Oak Avenue",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02101",
+      "country": "USA",
+      "phone": "555-111-2222"
+    },
+    "payment": {
+      "method": "debitCard",
+      "cardNumber": "5500000000000004",
+      "expiry": "06/26",
+      "cvv": "456",
+      "cardName": "Guest User"
+    },
+    "expectedResult": "success",
+    "description": "Checkout without account (guest)"
+  },
+  "promoCodes": {
+    "valid": {
+      "code": "SAVE10",
+      "type": "percentage",
+      "value": 10,
+      "expectedResult": "success",
+      "expectedDiscount": 102.997,
+      "description": "Valid percentage discount code"
+    },
+    "validFixed": {
+      "code": "FLAT20",
+      "type": "fixed",
+      "value": 20,
+      "expectedResult": "success",
+      "expectedDiscount": 20,
+      "description": "Valid fixed discount code"
+    },
+    "invalid": {
+      "code": "INVALIDCODE",
+      "expectedResult": "error",
+      "errorMessage": "Invalid promo code",
+      "description": "Non-existent promo code"
+    },
+    "expired": {
+      "code": "EXPIRED20",
+      "expectedResult": "error",
+      "errorMessage": "Promo code has expired",
+      "description": "Expired promo code"
+    },
+    "caseSensitive": {
+      "code": "save10",
+      "expectedResult": "error",
+      "errorMessage": "Promo code is case sensitive",
+      "description": "Promo code case sensitivity"
+    }
+  },
+  "shippingMethods": [
+    {
+      "id": "standard",
+      "name": "Standard Shipping",
+      "cost": 5.99,
+      "deliveryDays": "5-7 business days"
+    },
+    {
+      "id": "express",
+      "name": "Express Shipping",
+      "cost": 12.99,
+      "deliveryDays": "2-3 business days"
+    },
+    {
+      "id": "overnight",
+      "name": "Overnight Shipping",
+      "cost": 24.99,
+      "deliveryDays": "Next business day"
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": "creditCard",
+      "name": "Credit Card",
+      "requiredFields": ["cardNumber", "expiry", "cvv", "cardName"]
+    },
+    {
+      "id": "debitCard",
+      "name": "Debit Card",
+      "requiredFields": ["cardNumber", "expiry", "cvv", "cardName"]
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "requiredFields": ["email"]
+    }
+  ],
+  "edgeCases": {
+    "emptyFields": {
+      "shipping": {
+        "name": "",
+        "address": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": ""
+      },
+      "expectedResult": "error",
+      "errorFields": ["name", "address", "city", "state", "zip", "country"],
+      "errorMessage": "Please fill in all required fields",
+      "description": "Empty required shipping fields"
+    },
+    "invalidEmail": {
+      "shipping": {
+        "name": "Test User",
+        "address": "123 Test St",
+        "city": "Test City",
+        "state": "TS",
+        "zip": "12345",
+        "country": "USA"
+      },
+      "email": "invalidemail",
+      "expectedResult": "error",
+      "errorMessage": "Invalid email address",
+      "description": "Invalid email format"
+    },
+    "invalidZip": {
+      "shipping": {
+        "name": "Test User",
+        "address": "123 Test St",
+        "city": "Test City",
+        "state": "TS",
+        "zip": "abc",
+        "country": "USA"
+      },
+      "expectedResult": "error",
+      "errorMessage": "Invalid ZIP code",
+      "description": "Invalid ZIP code format"
+    },
+    "invalidPhone": {
+      "shipping": {
+        "name": "Test User",
+        "address": "123 Test St",
+        "city": "Test City",
+        "state": "TS",
+        "zip": "12345",
+        "country": "USA",
+        "phone": "abc"
+      },
+      "expectedResult": "error",
+      "errorMessage": "Invalid phone number",
+      "description": "Invalid phone number format"
+    },
+    "invalidCardNumber": {
+      "payment": {
+        "method": "creditCard",
+        "cardNumber": "1234567890",
+        "expiry": "12/25",
+        "cvv": "123"
+      },
+      "expectedResult": "error",
+      "errorMessage": "Invalid card number",
+      "description": "Invalid credit card number"
+    },
+    "expiredCard": {
+      "payment": {
+        "method": "creditCard",
+        "cardNumber": "4111111111111111",
+        "expiry": "01/20",
+        "cvv": "123"
+      },
+      "expectedResult": "error",
+      "errorMessage": "Card has expired",
+      "description": "Expired credit card"
+    },
+    "invalidCvv": {
+      "payment": {
+        "method": "creditCard",
+        "cardNumber": "4111111111111111",
+        "expiry": "12/25",
+        "cvv": "12"
+      },
+      "expectedResult": "error",
+      "errorMessage": "Invalid CVV",
+      "description": "Invalid CVV length"
+    },
+    "emptyCart": {
+      "cartItems": [],
+      "expectedResult": "error",
+      "errorMessage": "Your cart is empty",
+      "description": "Checkout with empty cart"
+    },
+    "priceMismatch": {
+      "expectedTotal": 1000.00,
+      "actualTotal": 900.00,
+      "expectedResult": "error",
+      "errorMessage": "Order total mismatch",
+      "description": "Price manipulation attempt"
+    }
+  },
+  "orderSummary": {
+    "subtotal": 1029.97,
+    "shipping": 5.99,
+    "tax": 87.55,
+    "discount": 0,
+    "total": 1123.51
+  },
+  "urls": {
+    "checkoutPage": "/checkout",
+    "orderConfirmationPage": "/order-confirmation",
+    "paymentPage": "/payment"
+  }
+}

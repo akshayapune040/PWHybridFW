@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Playwright
+playwright/.cache/
+playwright/test-results/
+playwright-report/
+playwright-report/
+
+# Test Results
+TestResults/
+test-results/
+*.log
+
+# Screenshots
+screenshots/
+**/screenshots/
+
+# Videos
+**/videos/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports
+allure-results/
+allure-report/
+html-report/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+*.exe
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Debug
+debug/

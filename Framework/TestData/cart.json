@@ -1,0 +1,157 @@
+{
+  "addToCart": [
+    {
+      "productId": "prod001",
+      "quantity": 1,
+      "expectedResult": "success",
+      "expectedCartCount": 1,
+      "expectedTotalPrice": 999.99,
+      "description": "Add single product to cart"
+    },
+    {
+      "productId": "prod002",
+      "quantity": 2,
+      "expectedResult": "success",
+      "expectedCartCount": 3,
+      "expectedTotalPrice": 1059.97,
+      "description": "Add multiple products to cart"
+    },
+    {
+      "productId": "prod003",
+      "quantity": 1,
+      "expectedResult": "success",
+      "expectedCartCount": 4,
+      "expectedTotalPrice": 1079.96,
+      "description": "Add clothing item to cart"
+    }
+  ],
+  "updateQuantity": [
+    {
+      "productId": "prod001",
+      "oldQty": 1,
+      "newQty": 3,
+      "expectedResult": "success",
+      "expectedCartTotal": 2999.97,
+      "description": "Increase product quantity"
+    },
+    {
+      "productId": "prod001",
+      "newQty": 0,
+      "expectedResult": "remove",
+      "expectedCartCount": 0,
+      "description": "Set quantity to zero removes item"
+    },
+    {
+      "productId": "prod002",
+      "oldQty": 2,
+      "newQty": 1,
+      "expectedResult": "success",
+      "expectedCartTotal": 1019.98,
+      "description": "Decrease product quantity"
+    }
+  ],
+  "removeItem": [
+    {
+      "productId": "prod001",
+      "expectedResult": "success",
+      "expectedCartCount": 2,
+      "expectedCartTotal": 49.98,
+      "description": "Remove single item from cart"
+    },
+    {
+      "productId": "prod002",
+      "expectedResult": "success",
+      "expectedCartCount": 0,
+      "expectedCartTotal": 0,
+      "description": "Remove last item results in empty cart"
+    }
+  ],
+  "duplicateProduct": {
+    "productId": "prod001",
+    "firstQuantity": 1,
+    "secondQuantity": 2,
+    "expectedTotalQuantity": 3,
+    "expectedResult": "success",
+    "description": "Adding same product twice increases quantity"
+  },
+  "edgeCases": {
+    "maxQuantity": {
+      "productId": "prod001",
+      "quantity": 99,
+      "expectedResult": "success",
+      "description": "Maximum quantity allowed"
+    },
+    "exceedMaxQuantity": {
+      "productId": "prod001",
+      "quantity": 100,
+      "expectedResult": "error",
+      "errorMessage": "Maximum quantity exceeded",
+      "description": "Quantity exceeds maximum limit"
+    },
+    "outOfStockProduct": {
+      "productId": "prod004",
+      "quantity": 1,
+      "expectedResult": "error",
+      "errorMessage": "Product out of stock",
+      "description": "Cannot add out of stock item to cart"
+    },
+    "negativeQuantity": {
+      "productId": "prod001",
+      "quantity": -1,
+      "expectedResult": "error",
+      "errorMessage": "Invalid quantity",
+      "description": "Negative quantity not allowed"
+    },
+    "zeroQuantity": {
+      "productId": "prod001",
+      "quantity": 0,
+      "expectedResult": "remove",
+      "description": "Zero quantity removes item"
+    },
+    "decimalQuantity": {
+      "productId": "prod001",
+      "quantity": 1.5,
+      "expectedResult": "error",
+      "errorMessage": "Quantity must be a whole number",
+      "description": "Decimal quantity not allowed"
+    },
+    "emptyCart": {
+      "description": "Empty cart state"
+    }
+  },
+  "priceCalculation": {
+    "withDiscount": {
+      "products": ["prod001", "prod002"],
+      "discount": 10,
+      "expectedDiscountAmount": 102.997,
+      "expectedFinalTotal": 926.973,
+      "description": "Cart total with discount applied"
+    },
+    "withoutDiscount": {
+      "products": ["prod001", "prod002"],
+      "expectedTotal": 1029.97,
+      "description": "Cart total without discount"
+    },
+    "taxCalculation": {
+      "products": ["prod001"],
+      "taxRate": 8.5,
+      "expectedTaxAmount": 84.99915,
+      "expectedTotalWithTax": 1084.98915,
+      "description": "Cart total with tax"
+    }
+  },
+  "cartPersistence": {
+    "afterPageRefresh": {
+      "expectedResult": "preserved",
+      "description": "Cart contents persist after page refresh"
+    },
+    "afterBrowserClose": {
+      "expectedResult": "preserved",
+      "description": "Cart contents persist after browser close (if logged in)"
+    }
+  },
+  "urls": {
+    "cartPage": "/cart",
+    "checkoutPage": "/checkout"
+  }
+}

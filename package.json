@@ -1,0 +1,24 @@
+{
+  "name": "hybrid-playwright-framework",
+  "version": "1.0.0",
+  "description": "Hybrid Playwright Test Automation Framework for E-Commerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:ui": "playwright test --ui"
+  },
+  "keywords": [
+    "playwright",
+    "test-automation",
+    "e-commerce",
+    "hybrid-framework"
+  ],
+  "author": "QA Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}

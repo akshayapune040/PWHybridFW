@@ -30,7 +30,7 @@ screenshots/
 .vscode/
 .idea/
 *.swp
-*.swo
+*.swo  
 *~
 
 # OS
